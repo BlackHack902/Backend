@@ -5,7 +5,7 @@ const {PORT} = require('./src/config/server.config');
 
 app.get('/',(req,res)=>{
     res.status(200).send({
-        msg:"Welcome"
+        msg:"Welcome",
     });
 });                                                                                 
 
