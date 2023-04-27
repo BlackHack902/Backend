@@ -1,13 +1,17 @@
 const app = require('./app');
 const {PORT} = require('./src/config/server.config');
+require('./src/config/db.config');
+
 
 //Route
 
-app.get('/api/',(req,res)=>{
-    res.status(200).send({
-        msg:"Welcome",
-    });
-});                                                                                 
+require('./src/routes/auth.route')(app);
+
+// app.get('/api/',(req,res)=>{
+//     res.status(200).send({
+//         msg:"Welcome",
+//     });
+// });                                                                                 
 
 
 
