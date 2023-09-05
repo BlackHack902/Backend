@@ -1,21 +1,22 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const secret = require('../config/auth.config');
-const {sendEmail} = require('../utlis/sendMail');
-const {userRegistration} = require('../script/mailScript')
+// const {sendEmail} = require('../utlis/sendMail');
+// const {userRegistration} = require('../script/mailScript')
 
 const signUp = async(req,res)=>{
     const userObj = {
-        name:req.body.name,
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
         email:req.body.email,
         password:bcrypt.hashSync(req.body.password, 8)
     };
     try{
         const user = await User.create(userObj);
         res.status(200).send(user);
-        const {subject,html} = userRegistration(user);
+        // const {subject,html} = userRegistration(user);
 
-        sendEmail([user.email],subject,html);
+        // sendEmail([user.email],subject,html);
     }catch(err){
         res.status(500).send({
             msg:"Somthing Wrong",
@@ -23,7 +24,7 @@ const signUp = async(req,res)=>{
     }
 };
 
-exports.signin = async (req,res) =>{
+const signIn = async (req,res) =>{
     const user = await User.findOne({email:req.body.email});
     if(user === null){
         return res.status(400).send({message:"invalid creds"});
@@ -34,12 +35,13 @@ exports.signin = async (req,res) =>{
         return res.status(400).send({message:"invalid creds"});
     };
 
-    let token = jwt.sign({email:user.email},secret,{expiresIn:86400});
+    //let token = jwt.sign({email:user.email},secret,{expiresIn:86400});
 
     res.status(200).send({
-        name:user.name,
+        firstname:user.firstname,
+        lastname:user.lastname,
         email:user.email,
-        accessToken:token
+        //accessToken:token
     });
 };
 
@@ -47,5 +49,5 @@ exports.signin = async (req,res) =>{
 
 module.exports = {
     signUp,
-    signin
+    signIn
 }
