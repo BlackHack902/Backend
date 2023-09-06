@@ -2,16 +2,16 @@ const mail = require('nodemailer');
 
 const sendEmail= async (email,subject,html) =>{
     let mailT = mail.createTransport({
-        //service:'gmail',
-        host:'smtp.gmail.com',
+        service:'gmail',
+        //host:'smtp.gmail.com',
 
         auth:{
-            user:"bongcodinga@gmail.com",
-            pass:"eafocchnrrrclgoaa",
+            user:"bongcoding@gmail.com",
+            pass:"kcytpuwgsvfdbyrm",
         }
     });
     let mailDetails = {
-        from: "bongcodinga@gmail.com",
+        from: "bongcoding@gmail.com",
         to:email,
         subject,
         html,

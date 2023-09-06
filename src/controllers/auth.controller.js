@@ -1,8 +1,8 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
-const secret = require('../config/auth.config');
-// const {sendEmail} = require('../utlis/sendMail');
-// const {userRegistration} = require('../script/mailScript')
+//const secret = require('../config/auth.config');
+const {sendEmail} = require('../utlis/sendMail');
+const {userRegistration} = require('../script/scriptMail')
 
 const signUp = async(req,res)=>{
     const userObj = {
@@ -14,9 +14,9 @@ const signUp = async(req,res)=>{
     try{
         const user = await User.create(userObj);
         res.status(200).send(user);
-        // const {subject,html} = userRegistration(user);
+        const {subject,html} = userRegistration(user);
 
-        // sendEmail([user.email],subject,html);
+        sendEmail([user.email],subject,html);
     }catch(err){
         res.status(500).send({
             msg:"Somthing Wrong",
