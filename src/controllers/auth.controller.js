@@ -27,12 +27,12 @@ const signUp = async(req,res)=>{
 const signIn = async (req,res) =>{
     const user = await User.findOne({email:req.body.email});
     if(user === null){
-        return res.status(400).send({message:"invalid creds"});
+        return res.status(400).send({message:"invalid creds (Email and Password)"});
     };
 
     const isPasswordValid = bcrypt.compareSync(req.body.password,user.password);
     if(!isPasswordValid){
-        return res.status(400).send({message:"invalid creds"});
+        return res.status(400).send({message:"invalid creds (Email and Password)"});
     };
 
     //let token = jwt.sign({email:user.email},secret,{expiresIn:86400});
