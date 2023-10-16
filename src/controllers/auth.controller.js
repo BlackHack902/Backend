@@ -6,8 +6,8 @@ const {userRegistration} = require('../script/scriptMail')
 
 const signUp = async(req,res)=>{
     const userObj = {
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
+        firstname:req.body.name,
+        // lastname:req.body.lastname,
         email:req.body.email,
         password:bcrypt.hashSync(req.body.password, 8)
     };
