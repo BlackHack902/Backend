@@ -15,7 +15,7 @@ const verifySignUpRequest = async (req,res,next)=>{
         return res.status(400).send({message:"Failed! email doesn't exists"});
     }
 
-        //validate email
+      
 
     user = await User.findOne({email:req.body.email});
 
